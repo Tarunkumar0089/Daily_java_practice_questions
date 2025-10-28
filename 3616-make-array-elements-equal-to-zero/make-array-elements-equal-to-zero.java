@@ -14,7 +14,7 @@ class Solution {
             if (nums[i] != 0) 
                 continue;
 
-            if (left == right)
+            if (left ==right)
                 result += 2;
             else if (Math.abs(left - right) == 1)
                 result++;
