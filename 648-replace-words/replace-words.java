@@ -1,5 +1,5 @@
 class Solution {
-    private String findRoot(String word, Set<String> st) {
+    public String findRoot(String word, Set<String> st) {
         for (int i = 1; i <= word.length(); i++) {
             String root = word.substring(0, i);
             if (st.contains(root)) {
