@@ -1,10 +1,6 @@
-import java.util.*;
-
 class Solution {
-
     static class Event implements Comparable<Event> {
         int y, type, xStart, xEnd;
-
         Event(int y, int type, int xStart, int xEnd) {
             this.y = y;
             this.type = type;
