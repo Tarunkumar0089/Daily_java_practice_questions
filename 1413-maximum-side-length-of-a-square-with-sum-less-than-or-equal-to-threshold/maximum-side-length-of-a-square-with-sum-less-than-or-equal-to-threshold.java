@@ -1,25 +1,33 @@
 class Solution {
     public int maxSideLength(int[][] mat, int threshold) {
-        int m = mat.length;
-        int n = mat[0].length;
+        int m = mat.length, n = mat[0].length;
 
-        int[][] preSum = new int[m + 1][n + 1];
+        int[][] pre = new int[m + 1][n + 1];
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                preSum[i][j] = preSum[i - 1][j] + preSum[i][j - 1]- preSum[i - 1][j - 1]+ mat[i - 1][j - 1];
+                pre[i][j] = pre[i - 1][j] + pre[i][j - 1] - pre[i - 1][j - 1] + mat[i - 1][j - 1];
             }
         }
-        int max = 0;
-        for (int side = 1; side <= Math.min(m, n); side++) {
-            for (int i = 0; i + side <= m; i++) {
-                for (int j = 0; j + side <= n; j++) {
-                    int sum = preSum[i + side][j + side] - preSum[i][j + side]- preSum[i + side][j] + preSum[i][j];
-                    if (sum <= threshold) {
-                        max = side;
-                    }
-                }
+        int low = 0, high = Math.min(m, n), ans = 0;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (isPossible(pre, m, n, mid, threshold)) {
+                ans = mid;
+                low = mid + 1;   
+            } else {
+                high = mid - 1; 
             }
         }
-        return max;
+        return ans;
+    }
+
+    private boolean isPossible(int[][] pre, int m, int n, int k, int threshold) {
+        for (int i = 0; i + k <= m; i++) {
+            for (int j = 0; j + k <= n; j++) {
+                int sum = pre[i + k][j + k]- pre[i][j + k]- pre[i + k][j] + pre[i][j];
+                if (sum <= threshold) return true;
+            }
+        }
+        return false;
     }
 }
