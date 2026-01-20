@@ -21,15 +21,16 @@ class Solution {
            right[i]=st2.isEmpty()?n:st2.peek()[1];
            st2.push(new int[]{nums[i],i});
         } 
-        long[] prefix = new long[n + 1];
-        prefix[0] = 0;
-        for (int i = 0; i < n; i++) {
-            prefix[i + 1] = prefix[i] + nums[i];
+        long[] prefix = new long[n];
+        prefix[0]=nums[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i]=prefix[i-1]+nums[i];
         }
         long max=0;
         for(int i=0;i<nums.length;i++){
-         long sum=prefix[right[i]]-prefix[left[i]+1];
-         max=Math.max(max,sum*nums[i]);
+         long l=left[i]<0?0:prefix[left[i]]; 
+         long r=prefix[right[i]-1]; 
+         max=Math.max(max,(long)nums[i]*(r-l));
         }
         return (int)(max%mod);
     }
