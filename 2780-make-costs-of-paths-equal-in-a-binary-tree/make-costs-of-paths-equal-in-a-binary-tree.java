@@ -11,7 +11,7 @@ class Solution {
         }
         int left=sol(n,2*i+1,cost);
         int right=sol(n,2*i+2,cost);
-         ans+=Math.abs(left-right);
+        ans+=Math.abs(left-right);
         return  cost[i] +Math.max(left,right);
     }
 }
