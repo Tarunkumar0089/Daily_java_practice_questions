@@ -28,6 +28,7 @@ class Solution {
     //   if(prev==-1 || nums[i]>nums[prev]){
     //     p=1+sol(i+1,i,nums,dp);
     //   }
+    
     //   return dp[i][prev+1]=Math.max(p,np);
     // }
 }
