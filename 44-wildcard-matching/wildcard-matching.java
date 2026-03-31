@@ -21,9 +21,6 @@ class Solution {
             boolean nottake = solve(s, p, i, j - 1, dp); // match 0 char
             dp[i][j] = (take || nottake) ? 1 : 0;
         }
-        else {
-            dp[i][j] = 0;
-        }
 
         return dp[i][j] == 1;
     }
@@ -33,6 +30,7 @@ class Solution {
         int m = p.length();
         int[][] dp = new int[n][m];
         for (int[] row : dp) java.util.Arrays.fill(row, -1);
+
         return solve(s, p, n - 1, m - 1, dp);
     }
 }
