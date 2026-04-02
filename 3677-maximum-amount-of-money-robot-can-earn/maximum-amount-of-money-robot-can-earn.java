@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int maximumAmount(int[][] coins) {
         int n = coins.length;
