@@ -5,19 +5,17 @@ class Solution {
 
         int[][][] dp = new int[n][m][3];
 
-        for (int[][] c : dp)for (int[] r : c)Arrays.fill(r, Integer.MIN_VALUE);
+        for (int[][] c : dp)for (int[] r : c)Arrays.fill(r, -1);
 
         for (int k = 0; k < 3; k++) {
             if (coins[0][0] < 0 && k > 0) dp[0][0][k] = 0;
             else dp[0][0][k] = coins[0][0];
         }
-
+        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-
                 if (i == 0 && j == 0) continue;
                 for (int k = 0; k < 3; k++) {
-
                     int best = Integer.MIN_VALUE;
 
                     // LEFT
