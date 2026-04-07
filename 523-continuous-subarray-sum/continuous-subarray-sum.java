@@ -10,8 +10,7 @@ class Solution {
             int previdx=map.get(rem);
             if(i-previdx>=2){
                 return true;
-            }
-            
+            } 
          }
          else{
             map.put(rem,i);
