@@ -5,7 +5,7 @@ class Solution {
             low = Math.max(low, w);
             high += w;
         }
-
+        
         while (low < high) {
             int mid = (low + high) / 2;
             if (canShip(weights, days, mid)) {
