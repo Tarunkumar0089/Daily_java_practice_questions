@@ -1,36 +1,42 @@
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-        int n=arr.length;
-        int mod=1000000007;
-        int left[] =new int[n];
-        int right[] =new int[n];
-
-        Stack<int[]>st1=new Stack<>();
-        Stack<int[]>st2=new Stack<>();
-
-        for(int i=0;i<n;i++){
-           while(!st1.isEmpty()&& arr[i]<=st1.peek()[0]){
-            st1.pop();
-           }
-           left[i]=st1.isEmpty()?-1:st1.peek()[1];
-           st1.push(new int[]{arr[i],i});
+        int N = arr.length;
+        int [] nsi = new int[arr.length];
+        Stack<Integer> st = new Stack<>();
+        for(int i=arr.length-1;i>=0;i--){
+            while(!st.isEmpty() && arr[st.peek()]>= arr[i]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                nsi[i]=arr.length;
+            }
+            else{
+                nsi[i] = st.peek();
+            }
+            st.push(i);
         }
 
-        for(int i=n-1;i>=0;i--){
-           while(!st2.isEmpty()&& arr[i]<st2.peek()[0]){
-            st2.pop();
-           }
-           right[i]=st2.isEmpty()?n:st2.peek()[1];
-           st2.push(new int[]{arr[i],i});
-        } 
+        st.clear();
+        int [] psi = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[st.peek()]>arr[i]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                psi[i]=-1;
+            }
+            else{
+                psi[i]=st.peek();
+            }
+            st.push(i);
+        }
 
         long sum=0;
-        for(int i=0;i<n;i++){
-            long l=i-left[i];
-            long r=right[i]-i;
-            long curr=arr[i]*(l*r);
-            sum+=curr;
+        for(int i=0;i<arr.length;i++){
+             int next = nsi[i];
+             int prev = psi[i];
+             sum+= ((long)arr[i]*((next-i)*(i-prev)));
         }
-        return (int)(sum%mod);
+        return (int)(sum%1000000007);
     }
 }
