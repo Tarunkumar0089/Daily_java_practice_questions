@@ -1,7 +1,9 @@
 class Solution {
     public int solve(int i, int buy, int cap, int[] prices, int[][][] dp) {
-        if (i == prices.length || cap == 0)return 0;
-        if (dp[i][buy][cap] != -1) return dp[i][buy][cap];
+        if (i == prices.length || cap == 0)
+            return 0;
+        if (dp[i][buy][cap] != -1)
+            return dp[i][buy][cap];
         int profit;
         if (buy == 1) {
             profit = Math.max(
