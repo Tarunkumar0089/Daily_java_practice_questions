@@ -13,7 +13,6 @@ class Solution {
         int count = 0;
 
         for (int num : arr) {
-          //  if (num > target) break; 
             count += Combination(arr, target - num,dp);
         }
         return dp[target]=count;
