@@ -4,18 +4,14 @@ public class Solution {
         if (t.length() > n)
             return "";
         Map<Character, Integer> mp = new HashMap<>();
-        for (char ch : t.toCharArray())
-            mp.put(ch, mp.getOrDefault(ch, 0) + 1);
-
+        for (char ch : t.toCharArray())mp.put(ch, mp.getOrDefault(ch, 0) + 1);
         int requiredCount = t.length();
         int i = 0, j = 0;
-
         int minWindowSize = Integer.MAX_VALUE;
         int start_i = 0;
         while (j < n) {
             char ch = s.charAt(j);
-            if (mp.containsKey(ch) && mp.get(ch) > 0)
-                requiredCount--;
+            if (mp.containsKey(ch) && mp.get(ch) > 0)requiredCount--;
             mp.put(ch, mp.getOrDefault(ch, 0) - 1);
             while (requiredCount == 0) {
                 int currWindowSize = j - i + 1;
