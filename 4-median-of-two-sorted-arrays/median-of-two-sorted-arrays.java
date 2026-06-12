@@ -1,36 +1,21 @@
 public class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        if(nums1.length>nums2.length) return findMedianSortedArrays(nums2,nums1);
-        int n=nums1.length;
-        int m=nums2.length;
-        
-        int low=0;
-        int high=n;
-        while(low<=high){
-            int cut1=(low+high)/2;
-            int cut2=(n+m+1)/2-cut1;
-
-            int left1=(cut1==0) ? Integer.MIN_VALUE:nums1[cut1-1];
-            int right1=(cut1==n) ? Integer.MAX_VALUE:nums1[cut1];
-
-            int left2=(cut2==0)? Integer.MIN_VALUE:nums2[cut2-1];
-            int right2=(cut2==m)?Integer.MAX_VALUE:nums2[cut2];
-
-            if(left1<=right2 && left2<=right1){
-                if((n+m)%2==0){
-                    return (Math.max(left1,left2)+Math.min(right1,right2))/2.0;
-                }
-                else{
-                    return Math.max(left1,left2);
-                }
-            }
-            else if(left1>right2){
-                high=cut1-1;
-            }
-            else{
-                low=cut1+1;
+        List<Integer> merged = new ArrayList<>();
+        int i = 0, j = 0;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] < nums2[j]) {
+                merged.add(nums1[i++]);
+            } else {
+                merged.add(nums2[j++]);
             }
         }
-        return 0.0;
+        while (i < nums1.length) merged.add(nums1[i++]);
+        while (j < nums2.length) merged.add(nums2[j++]);
+        int mid = merged.size() / 2;
+        if (merged.size() % 2 == 0) {
+            return (merged.get(mid-1) + merged.get(mid)) / 2.0;
+        } else {
+            return merged.get(mid);
+        }
     }
 }
