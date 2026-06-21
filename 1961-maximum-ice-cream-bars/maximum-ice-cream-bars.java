@@ -6,6 +6,8 @@ class Solution {
             if(costs[i]<=coins){
                 coins-=costs[i];
                 cnt++;
+            }else{
+                break;
             }
         }
         return cnt;
