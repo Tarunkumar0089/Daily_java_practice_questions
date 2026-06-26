@@ -1,56 +1,53 @@
 class Solution {
-    public void solveSudoku(char[][] board) {
-        solve(board,0,0);
+    public void solveSudoku(char[][] arr) {
+        sol(arr, 0, 0);
     }
-    public static boolean solve(char[][] board,int row, int col){
-        if(col==9){
-            col=0;
-            row++;
-        }
-        if(row==9){
+    public static boolean sol(char arr[][], int cr, int cc){
+        if(cr==9){
             return true;
         }
-        if(board[row][col] != '.'){
-           return solve(board,row,col+1);
+        if(cc==9){
+           return sol(arr, cr+1, 0);
         }
-        else{
-           
-            for(char val='1';val<='9';val++){
-                if(isSafe(val,board,row,col)){
-                    board[row][col]=val;
-                   if(solve(board,row, col+1)) {
+        if(arr[cr][cc]!='.'){
+            return sol(arr, cr, cc+1);
+        }else{
+            for(char i='1'; i<='9'; i++){
+                if(isItPossible(arr, cr, cc, i)){
+                    arr[cr][cc]=i;
+                    if(sol(arr, cr,cc+1)){
                     return true;
-                   }
-                    board[row][col]='.';
                 }
+                }
+                arr[cr][cc]='.';
             }
         }
         return false;
     }
-    public static boolean isSafe(char val, char[][] board,int row, int col){
-        for(int c=0;c<board[0].length;c++){
-            if(board[row][c]==val){
+     public static boolean isItPossible(char[][] board, int cr, int cc, char num) {
+        for (int row = 0; row < 9; row++) {
+            if (board[row][cc] == num) {
                 return false;
             }
         }
-        //check column
-        for(int r=0;r<board.length;r++){
-            if(board[r][col]==val){
+
+        for (int col = 0; col < 9; col++) {
+            if (board[cr][col] == num) {
                 return false;
             }
         }
-        //check matrix;
-        int r= row - row%3;
-        int c= col - col%3;
-        for(int i=r;i<r+3;i++){
-            for(int j=c;j<c+3;j++){
-                if(board[i][j]==val){
+
+        int sr = (cr / 3) * 3;
+        int sc = (cc / 3) * 3;
+
+        for (int row = sr; row < sr + 3; row++) {
+            for (int col = sc; col < sc + 3; col++) {
+                if (board[row][col] == num) {
                     return false;
                 }
             }
         }
-        return true;
-        
-    }
 
+        return true;
+    }
 }
