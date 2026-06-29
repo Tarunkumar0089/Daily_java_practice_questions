@@ -1,26 +1,30 @@
-import java.util.*;
-
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || nums.length == 0) return new int[0];
+        int [] res = new int[nums.length-k+1];
+        int idx = 0;
 
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
-        Deque<Integer> dq = new ArrayDeque<>();
+        int curr = 0;
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->Integer.compare(b.val,a.val));
+        for(int i=0;i<nums.length;i++){
+            curr++;
+            pq.add(new Pair(i,nums[i]));
+            if(curr>=k){
+                res[idx++] = pq.peek().val;
+            }
 
-        for (int i = 0; i < n; i++) {
-            while (!dq.isEmpty() && dq.peekFirst() <= i - k) {
-                dq.pollFirst();
+            while(!pq.isEmpty() && pq.peek().idx <= i-k+1){ // 0
+                pq.poll();
             }
-            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
-                dq.pollLast();
-            }
-            dq.offerLast(i);
-            if (i >= k - 1) {
-                result[i - k + 1] = nums[dq.peekFirst()];
-            }
+
         }
-
-        return result;
+        return res;
+    }
+    static class Pair{
+        int idx;
+        int val;
+        public Pair(int idx, int val){
+            this.idx = idx;
+            this.val = val;
+        }
     }
 }
