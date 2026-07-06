@@ -6,12 +6,22 @@ class Solution {
             }
             return a[0]-b[0];  
         });
-        List<int[]> list = new ArrayList<>();
-        for (int[] interval:intervals) {
-            if (list.isEmpty()||interval[1]>list.get(list.size()-1)[1]) {
-                list.add(interval);
+        // (1,4) (2,8)  (3,6)
+
+        int prevfirst=intervals[0][0];
+        int prevlast=intervals[0][1];
+        int cnt=0;
+        for(int i=1;i<intervals.length;i++){
+            int currfirst=intervals[i][0];
+            int currlast=intervals[i][1];
+
+            if(currfirst>= prevfirst &&  prevlast>=currlast){
+                cnt++;
+            }else{
+                prevfirst=currfirst;
+                prevlast=currlast;
             }
         }
-        return list.size();
+        return intervals.length-cnt;
     }
 }
