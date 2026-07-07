@@ -12,8 +12,8 @@ class Solution {
             }
             n=n/10;
         }
-        sb.reverse();
-        long num=Long.parseLong(sb.toString());
+       sb.reverse();
+       long num=Long.parseLong(sb.toString());
        long ans=sum*num;
        return ans;
     }
