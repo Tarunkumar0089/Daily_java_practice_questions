@@ -1,7 +1,10 @@
 class Solution {
     public int[] arrayRankTransform(int[] arr) {
         int n=arr.length;
-        int[] ans=arr.clone();
+        int[] ans=new int[n];
+        for(int i=0;i<n;i++){
+            ans[i]=arr[i];
+        }
 
         Arrays.sort(ans);
         HashMap<Integer,Integer>map=new HashMap<>();
