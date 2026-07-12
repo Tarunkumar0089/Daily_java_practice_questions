@@ -6,7 +6,8 @@ class Solution {
         int ans=0;
         HashSet<Integer>set=new HashSet<>();
         while(ei<nums.length){
-             if(set.add(nums[ei])){
+             if(!set.contains(nums[ei])){
+                set.add(nums[ei]);
                 currsum+=nums[ei];
                 ans=Math.max(ans,currsum);
                 ei++;
