@@ -10,10 +10,10 @@ class Solution {
         while(ei<nums.length){
             int num=nums[ei];
             map.put(nums[ei],map.getOrDefault(num,0)+1);
-
+            
             while(map.size()>k){
                 int rem = nums[si];
-                map.put(nums[si],map.get(rem)-1);
+                map.put(rem,map.get(rem)-1);
                 if(map.get(rem)==0) map.remove(rem);
                 si++;
             }
