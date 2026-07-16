@@ -34,7 +34,7 @@ class Solution {
         }
         long sum=0;
         for(int i=0;i<arr.length;i++){
-            sum = (sum+ ((long)arr[i]*(long)(i-pref[i]) * (long)(suff[i]-i))%1000000007)%1000000007;
+            sum = (sum+ ((long)arr[i]*(long)(i-pref[i]) * (long)(suff[i]-i)));
            // sum+=((long)((i-pref[i])*(long)(suff[i]-i))*(long)arr[i])%1000000007;
         }
 
