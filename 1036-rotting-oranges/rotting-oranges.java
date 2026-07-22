@@ -14,7 +14,7 @@ class Solution {
             }
         }
         if (fresh == 0) return 0;
-         int[][]dir={{1,0},{0,1},{-1,0},{0,-1}};
+        int[][]dir={{1,0},{0,1},{-1,0},{0,-1}};
         int time =-1;
         while (!q.isEmpty()) {
             time++;
