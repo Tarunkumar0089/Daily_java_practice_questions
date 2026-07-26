@@ -6,7 +6,7 @@ class Solution {
     }
     public int sol(int idx,int n,String s,int[]dp){
         if(idx==n ||check(idx,n-1,s)) return 0;
-
+        
         if(dp[idx]!=-1) return dp[idx];
 
         int min=Integer.MAX_VALUE;
