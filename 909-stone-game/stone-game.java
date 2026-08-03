@@ -26,7 +26,6 @@ class Solution {
         else{
             A = Solve(nums,i+1,j,0);
             B = Solve(nums,i,j-1,0);
-            return dp[i][j][turn] = Math.min(A,B);
         }
         return dp[i][j][turn] = Math.max(A,B);
 
