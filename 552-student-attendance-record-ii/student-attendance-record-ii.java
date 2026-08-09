@@ -1,32 +1,29 @@
 class Solution {
-    static int mod=1000000007;
+    public static final int MOD = 1_000_000_007;
+    private int[][][] dp;
     public int checkRecord(int n) {
-        long[][][]dp=new long[n][2][3];
-        for(long[][]d:dp){
-            for(long[]r:d){
-                Arrays.fill(r,-1);
+        dp = new int[n + 1][2][3];
+    
+        for (int i = 0; i <= n; i++) {
+            for (int a = 0; a < 2; a++) {
+                Arrays.fill(dp[i][a], -1);
             }
         }
-
-        return sol(0,0,0,n,dp);
+        
+        return sol(n, 0, 0, 0);
     }
-    public int sol(int idx,int a,int l,int n,long[][][]dp){
-        if(idx==n) return 1;
-        if(dp[idx][a][l]!=-1) return (int)dp[idx][a][l];
 
-        long ans=0;
-        ans+=sol(idx+1,a,0,n,dp);
-        ans%=mod;
+    private int sol(int n, int i, int a, int l) {
+        if (a >= 2 || l >= 3) return 0;
 
-        if(l<2){
-            ans+=sol(idx+1,a,l+1,n,dp);
-            ans%=mod;
-        }
+        if (i == n) return 1;
+        if (dp[i][a][l] != -1) return dp[i][a][l];
+        
+        long ans = 0;
+        ans = (ans + sol(n, i + 1, a, 0)) % MOD;     
+        ans = (ans + sol(n, i + 1, a + 1, 0)) % MOD;  
+        ans = (ans + sol(n, i + 1, a, l + 1)) % MOD; 
 
-        if(a==0){
-           ans+=sol(idx+1,1,0,n,dp);
-           ans%=mod;
-        }
-        return (int)(dp[idx][a][l]=ans);
+        return dp[i][a][l] = (int) ans;
     }
 }
