@@ -12,7 +12,7 @@ class Solution {
       if(dp[idx][p]!=-1) return dp[idx][p];
       int cp=nums[idx]%2;
       long np=sol(idx+1,p,nums,dp,n,x);
-      long pi;
+      long pi=0;
       if(cp==p){
          pi=nums[idx]+sol(idx+1,cp,nums,dp,n,x);
       }else{
