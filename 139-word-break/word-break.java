@@ -12,7 +12,7 @@ class Solution {
     public boolean sol(String s, int i, Boolean[] dp, HashSet<String> set, int maxLen) {
         if (i == s.length()) return true;
         if (dp[i] != null) return dp[i]; 
-        for (int j = i+1; j <= s.length(); j++) {
+        for (int j = i + 1; j <= s.length() && j - i <= maxLen; j++) {
             if (set.contains(s.substring(i, j)) && sol(s, j, dp, set, maxLen)) {
                 return dp[i] = true;
             }
