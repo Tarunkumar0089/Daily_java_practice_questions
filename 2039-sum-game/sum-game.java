@@ -1,6 +1,6 @@
 class Solution {
     public boolean sumGame(String num) {
-        int n = num.length();
+        int n=num.length();
         int leftKnownSum = 0;
         int rightKnownSum = 0;
 
