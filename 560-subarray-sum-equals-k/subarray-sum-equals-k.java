@@ -3,7 +3,6 @@ class Solution {
         HashMap<Integer,Integer> map= new HashMap<>();
         int curr=0;
         int ans=0;
-        
         map.put(0,1);
         for(int num:nums){
             curr+=num;
