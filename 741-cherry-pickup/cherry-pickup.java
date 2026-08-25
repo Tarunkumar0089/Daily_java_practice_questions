@@ -11,7 +11,7 @@ class Solution {
         int c2=r1+c1-r2;
 
         if (r1>=n||c1>=n||r2>=n||c2>=n||grid[r1][c1]==-1||grid[r2][c2]==-1){
-            return (int)-1e8;
+            return Integer.MIN_VALUE;
         }
         if (r1==n-1&&c1==n-1) {
             return grid[r1][c1];
