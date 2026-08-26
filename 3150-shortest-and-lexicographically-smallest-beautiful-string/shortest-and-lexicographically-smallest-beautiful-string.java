@@ -14,9 +14,7 @@ class Solution {
                 while(si<=ei && s.charAt(si)=='0'){
                     si++;
                 }
-                if(s.charAt(si)=='1'){
-                    cnt--;
-                }
+                
 
                 String curr=s.substring(si,ei+1);
 
@@ -26,7 +24,9 @@ class Solution {
                      ans=curr;
                 }
 
-                
+                if(s.charAt(si)=='1'){
+                    cnt--;
+                }
                 si++;
             }
 
