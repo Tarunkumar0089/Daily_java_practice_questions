@@ -13,7 +13,7 @@ class Solution {
         // map.put(1000000000 , 999999999999);
         // map.put(1000000000000 , 999999999999999);
         long ans=0;
-        long num=1000L;
+        long num=1000;
         while(n>=num){
             ans+=(n-num+1);
 
