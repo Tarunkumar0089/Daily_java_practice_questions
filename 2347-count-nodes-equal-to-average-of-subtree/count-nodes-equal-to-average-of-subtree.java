@@ -15,32 +15,25 @@
  */
 class Solution {
     int cnt=0;
-    int totalSum=0;
-    int totalCnt=0;
     public int averageOfSubtree(TreeNode root) {
         dfs(root);
         return cnt;
     }
 
-    public void dfs(TreeNode node){
+    public int[] dfs(TreeNode node){
         if(node==null) {
-            return ;
+            return new int[]{0,0};
         }
 
-        int currSum=totalSum;
-        int currCnt=totalCnt;
+        int[]left=dfs(node.left);
+        int[]right=dfs(node.right);
 
-        dfs(node.left);
-        dfs(node.right);
-
-        totalSum+=node.val;
-        totalCnt+=1;
-        
-        int subtreeSum=totalSum-currSum;
-        int subtreeCnt=totalCnt-currCnt;
-        if(subtreeSum/subtreeCnt==node.val){
+        int currSum=left[0]+right[0]+node.val;
+        int currCnt=left[1]+right[1]+1;
+        if(currSum/currCnt==node.val){
             cnt++;
         }
-        
+
+        return new int[]{currSum,currCnt};
     }
 }
