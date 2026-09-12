@@ -14,17 +14,15 @@ class Solution {
         return solve(prices, 0, 1, 2); 
     }
 
-    private int solve(int[] prices, int i, int canBuy, int cap) {
+    public int solve(int[] prices, int i, int canBuy, int cap) {
         if (i == prices.length || cap == 0) return 0;
-        
         if (dp[i][canBuy][cap] != -1) return dp[i][canBuy][cap];
 
         int profit;
-
         if (canBuy == 1) {
             int buy = -prices[i] + solve(prices, i + 1, 0, cap);
             int skip = solve(prices, i + 1, 1, cap);
-            profit = Math.max(buy, skip);
+           profit = Math.max(buy, skip);
         } else {
             int sell = prices[i] + solve(prices, i + 1, 1, cap - 1);
             int skip = solve(prices, i + 1, 0, cap);
