@@ -8,20 +8,15 @@ class Solution {
             adj.get(t[0]).add(new int[]{t[1], t[2]});
         }
         PriorityQueue<int[]> pq = new PriorityQueue<>( (a,b) -> a[0] - b[0] );
-
         pq.add(new int[]{0, k});
-
         int[] dist = new int[n+1];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[k] = 0;
-
         while(!pq.isEmpty()){
             int[] curr = pq.poll();
             int time = curr[0];
             int node = curr[1];
-
             if(time > dist[node]) continue;
-
             for(int[] neigh : adj.get(node)){
                 int newNode = neigh[0];
                 int wt = neigh[1];
