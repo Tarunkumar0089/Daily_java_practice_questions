@@ -1,57 +1,53 @@
-class Solution {
+public class Solution {
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> list = new ArrayList<>();
-        boolean[][] board = new boolean[n][n];  
-        solveNQueens(board, n, 0, list); 
-        return list;  
-    }
-
-    public void solveNQueens(boolean[][] board, int tq, int row, List<List<String>> list) {
-        if (tq==0) {
-            list.add(constructBoard(board));
-            return;
+        List<List<String>> ans = new ArrayList<>();
+        char[][] board = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
         }
-
-        for (int col = 0; col < board[0].length; col++) {
-            if (isSafe(board, row, col)) {
-                board[row][col] = true;  
-                solveNQueens(board, tq-1, row + 1, list);
-                board[row][col] = false;  
-            }
-        }
-    }
-
-    public List<String> constructBoard(boolean[][] board) {
-        List<String> ans = new ArrayList<>();
-        for (boolean[] row : board) {
-            StringBuilder sb = new StringBuilder();
-            for (boolean cell : row) {
-                sb.append(cell ? 'Q' : '.');  
-            }
-            ans.add(sb.toString());
-        }
+        solve(0, board, ans, n);
         return ans;
     }
 
-    public boolean isSafe(boolean[][] board, int row, int col) {
-        int r = row, c = col;
-        while (r >= 0) {
-            if (board[r][col]) return false;
-            r--;
+   public static void solve(int row, char[][] board, List<List<String>> ans, int n) {
+        if (row == n) {
+            List<String> temp = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                temp.add(new String(board[i]));
+            }
+            ans.add(temp);
+            return;
         }
-        r = row;
-        c = col;
-        while (r >= 0 && c >= 0) {
-            if (board[r][c]) return false;
-            r--;
-            c--;
+
+        for (int col=0;col<n;col++) {
+            if (isSafe(row,col,board,n)) {
+                board[row][col]='Q';
+                solve(row+1,board,ans,n);
+                board[row][col]='.';
+            }
         }
-        r = row;
-        c = col;
-        while (r >= 0 && c < board[0].length) {
-            if (board[r][c]) return false;
-            r--;
-            c++;
+    }
+
+   public static boolean isSafe(int row,int col,char[][] board, int n) {
+        // Check column
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 'Q') {
+                return false;
+            }
+        }
+
+        // Check upper-left diagonal
+        for (int i=row-1,j=col-1; i >= 0&&j>=0;i--,j--) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        // Check upper-right diagonal
+        for (int i=row-1,j=col+1;i>=0&&j<n;i--,j++) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
         }
 
         return true;
