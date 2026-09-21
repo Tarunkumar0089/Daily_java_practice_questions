@@ -1,6 +1,6 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-    //      int[][]dp=new int[nums.length][nums.length+1];
+    //    int[][]dp=new int[nums.length][nums.length+1];
     //   for(int[]r:dp)   Arrays.fill(r,-1);
     //        return sol(0,-1,nums,dp);
         int n = nums.length;
