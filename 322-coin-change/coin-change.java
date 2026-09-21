@@ -10,12 +10,10 @@ class Solution {
     }
 
     public int solve(int idx, int target, int[] coins, int[][] dp) {
-        if (idx == 0) {
-            if (target % coins[0] == 0)
-                return target / coins[0];
-            else
-                return (int)1e9;
+        if (target == 0) {
+            return 0;
         }
+        if(idx<0) return (int)1e9;
         
         if (dp[idx][target] != -1) return dp[idx][target];
         int notTake = solve(idx - 1, target, coins, dp);
@@ -23,7 +21,6 @@ class Solution {
         if (coins[idx] <= target) {
             take = 1 + solve(idx, target - coins[idx], coins, dp);
         }
-
         return dp[idx][target] = Math.min(take, notTake);
     }
 }
